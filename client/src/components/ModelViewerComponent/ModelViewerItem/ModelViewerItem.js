@@ -83,10 +83,12 @@ const ModelViewerItem = ({ item, itemIndex, onCreate, onView, onDelete, onSelect
   return (
     <div className={classNames.item} tabIndex="0" data-selection-index={itemIndex} data-selection-toggle
       data-is-focusable onClick={onSelect} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDownItem} ref={setRef}>
-      <div className={`mv_listItem ${isSelected ? "mv_listItem_selected" : ""}`} data-selection-invoke>
+      <div className={`mv_listItem ${isSelected ? "mv_listItem_selected" : ""}`} data-selection-invoke title={`${item.description} ${item.comment}`} >
         <Stack horizontal={false}>
           <Stack horizontal>
-            <div className="mv_listItemName testClass" aria-label={`list-item-${item.displayName}`} role="listitem" data-selection-invoke>{item.displayName}</div>
+            <div className="mv_listItemName testClass" aria-label={`list-item-${item.displayName}`} role="listitem" data-selection-invoke>
+              {item.displayName}
+            </div>
             <div className="mv_buttonGroup" title={t("modelViewerItem.moreButton")} aria-label={t("modelViewerItem.moreButton")}>
               <ModelViewerItemCommandBarComponent
                 item={item}

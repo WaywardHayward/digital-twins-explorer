@@ -12,6 +12,7 @@ import iotCentralContext from "./ref/iotCentralContext";
 const REL_TARGET_ANY = "*";
 const getModelDisplayName = vertex => vertex.getAttributeValue("dtmi:dtdl:property:displayName;2");
 const getModelDescription = vertex => vertex.getAttributeValue("dtmi:dtdl:property:description;2");
+const getModelComment = vertex => vertex.getAttributeValue("dtmi:dtdl:property:comment;2");
 const getPropertyName = vertex => vertex.getAttributeValue("dtmi:dtdl:property:name;2");
 const getPropertyWritable = vertex => vertex.getAttributeValue("http://azure.com/DigitalTwin/MetaModel/undefinedTerm/writable");
 
@@ -235,6 +236,8 @@ export class ModelService {
       const contents = {
         id: model.id,
         displayName: model.getAttributeValue("dtmi:dtdl:property:displayName;2"),
+        description: model.getAttributeValue("dtmi:dtdl:property:displayName;2"),
+        comment: model.getAttributeValue("dtmi:dtdl:property:comment;2"),
         properties: [],
         componentProperties: [],
         relationships: [],
@@ -330,8 +333,16 @@ export class ModelService {
     if (!contents.displayName) {
       contents.displayName = getModelDisplayName(vertex);
     }
-    if (!isExtended) {
+
+    if (!contents.description) {
       contents.description = getModelDescription(vertex);
+    }
+
+    if (!contents.comment) {
+      contents.comment = getModelComment(vertex);
+    }
+
+    if (!isExtended) {
       contents.isDefined = vertex.hasAttributeValue("is_defined", true);
     }
 

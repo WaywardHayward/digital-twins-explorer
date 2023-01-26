@@ -120,6 +120,8 @@ class ModelViewerComponent extends Component {
 
     const items = list.map(m => ({
       displayName: (m.displayName && m.displayName.en) || m.id,
+      description: (m.model.description && m.model.description.en) || m.model.description || "",
+      comment: (m.model.comment && m.model.comment.en) || m.model.comment || "",
       key: m.id,
       selected: false
     }));
